@@ -1,22 +1,20 @@
 const express = require("express");
 
-const router = express.Router();
-
-const upload = require("../multer");
-
 const {
   addEmployee,
   getEmployees,
-  deleteEmployee,
+  verifyDocument,
 } = require("../controllers/employeeController");
 
-router.post(
-  "/add",
-  upload.single("document"),
-  addEmployee
-);
+const router = express.Router();
+
+router.post("/add", addEmployee);
 
 router.get("/", getEmployees);
-router.delete("/delete/:id", deleteEmployee);
+
+router.patch(
+  "/verify/:id",
+  verifyDocument
+);
 
 module.exports = router;
